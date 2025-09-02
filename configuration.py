@@ -33,6 +33,11 @@ Defaults to "ogg", for use with Craig recordings, but
 I would think that things like "wav" or "flac" would 
 work too.
 ''')
+    recognizeConfigGroup.add_argument('--modelType', type=str, default='small', help='''Model to use for transcription. Can be a standard Whisper model 
+size (tiny, base, small, medium, large) or a custom model path 
+from HuggingFace (e.g., "voxreality/whisper-small-el-finetune").
+Defaults to "small".
+''')
     recognizeConfigGroup.add_argument('--fast', action='store_true', 
                                       help='''Prioritize recognition speed over accuracy.
 Results in the following changes:
