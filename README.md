@@ -198,3 +198,32 @@ I haven't put this on PyPI yet (and probably need to reorganize it a bit in orde
 What you can do, though, is clone or download the contents of this repo, cd to it and then say `pip install . `.  That should allow you to use the `tasmas` command.  
 
 You can also just say `python tasmas.py` instead though, if you feel like it.
+
+#### Python Requirements and Setup
+TASMAS requires **Python 3.11** and several dependencies. Here's how to set it up:
+
+1. **Ensure Python 3.11 is installed** on your system
+2. **Create a virtual environment** (recommended):
+   ```bash
+   python3.11 -m venv venv
+   source venv/bin/activate  # On Linux/Mac
+   # or
+   venv\Scripts\activate     # On Windows
+   ```
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Install TASMAS**:
+   ```bash
+   pip install .
+   ```
+5. **Run TASMAS**:
+   ```bash
+   tasmas semiauto /path/to/your/recordings
+   ```
+
+**Note**: If you prefer not to install TASMAS as a package, you can run it directly with:
+```bash
+python tasmas.py semiauto /path/to/your/recordings
+```

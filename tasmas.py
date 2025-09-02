@@ -129,11 +129,11 @@ def check_cuda():
     else:
         print("  CUDA is available.")
 
-def main():
+def main(args):
     # sys.argv contains the command-line arguments
     # sys.argv[0] is the script name
     # sys.argv[1:] are the arguments passed to the script
-    args = sys.argv[1:]
+    # args = sys.argv[1:]
     config = get_configuration(args)
     inputDir = config['inputDir']
     no_ellipses = config.get('noEllipses', False)
@@ -152,7 +152,8 @@ def main():
 
     operation = config['operationMode']
     if operation in ['recognize', 'semiauto', 'fullauto']:
-        check_names_extension = config.get('extension', 'ogg').strip() or 'ogg'
+        extension = config.get('extension')
+        check_names_extension = extension.strip() if extension else 'ogg'
     else:
         check_names_extension = 'words.json'
 
