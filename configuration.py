@@ -38,6 +38,15 @@ size (tiny, base, small, medium, large) or a custom model path
 from HuggingFace (e.g., "voxreality/whisper-small-el-finetune").
 Defaults to "small".
 ''')
+    recognizeConfigGroup.add_argument('--slow', action='store_true', 
+                                      help='''Prioritize recognition accuracy over speed.
+Results in the following changes:
+- Uses the "medium" model instead of the "small" model 
+- Uses "accurate" params rather than "efficient" ones
+- Uses the Silero VAD instead of the Auditok VAD
+Use this for languages that are not English and are having issues with the default small model.
+'''
+)
     recognizeConfigGroup.add_argument('--fast', action='store_true', 
                                       help='''Prioritize recognition speed over accuracy.
 Results in the following changes:

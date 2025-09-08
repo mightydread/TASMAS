@@ -6,8 +6,8 @@ import whisper_timestamped as whisper
 
 from utils import extract_speaker_name
 
-def recognize(input_dir: str, names: Dict[str, str], fast: bool = False, model_type: str = "small", device: str = "cuda", audio_ext: str = "ogg"):
-    model_type = "tiny" if fast else model_type
+def recognize(input_dir: str, names: Dict[str, str], fast: bool = False, slow: bool = False, model_type: str = "small", device: str = "cuda", audio_ext: str = "ogg"):
+    model_type = "tiny" if fast else "medium" if slow else model_type
     model = whisper.load_model(model_type, device=device)
 
     print()
@@ -35,12 +35,14 @@ def recognize(input_dir: str, names: Dict[str, str], fast: bool = False, model_t
             audio = whisper.load_audio(os.path.join(input_dir, audio_file))
             if fast:
                 results = whisper.transcribe(model, audio, detect_disfluencies=True, vad="auditok")
+            elif slow:
+                results = whisper.transcribe(model, audio, detect_disfluencies=True, vad="silero", beam_size=5, best_of=5, temperature=(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))
             else:
                 results = whisper.transcribe(model, audio, detect_disfluencies=True, vad="auditok", beam_size=5, best_of=5, temperature=(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))
 
             json_file = os.path.join(input_dir, audio_file + '.words.json')
             with open(json_file, 'w') as f:
-                f.write(json.dumps(results))
+                f.write(json.dumps(results, ensure_ascii = False))
             print(f"  Saved to {json_file}")
             print()
     print("--------------------")
