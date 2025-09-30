@@ -8,7 +8,7 @@ def do_summary(transcript, client, prompt_file):
     with open(prompt_file, 'r') as file:
         prompt = file.read()
 
-    completion = client.chat.completions.create(model="gpt-4-0125-preview", 
+    completion = client.chat.completions.create(model="gpt-4-turbo",
         messages=[
         {"role": "system", "content" : "You are a chatbot which can summarize long transcripts."},
         {"role": "user", "content" : f'{prompt}{transcript}'},
